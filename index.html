@@ -1,1 +1,295 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071B4D"><meta name="description" content="BusGo smart bus booking and live tracking."><link rel="manifest" href="manifest.webmanifest"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="typography.css"><script src="https://unpkg.com/lucide@latest"></script><title>BusGo | Travel smarter</title></head><body class="passenger-page"><header class="app-nav"style="position: sticky; top: 0; z-index: 1000;"><a class="brand" href="index.html"><span class="brand-mark"><i data-lucide="bus-front"></i></span><span>Bus<span>Go</span></span></a><nav><a class="active" href="#home">Home</a><a href="#routes">Find Buses</a><a href="#routes">Routes</a><a href="#tracking">Live Tracking</a><a href="#booking">My Bookings</a><a href="#footer">Help</a></nav><div class="nav-actions"><button class="circle-button" title="Notifications" aria-label="Notifications"><i data-lucide="bell"></i><b></b></button><button class="profile-button" title="Profile" aria-label="Profile"><span>AK</span></button><button class="menu-button" aria-label="Open menu"><i data-lucide="menu"></i></button></div></header><main id="home"><section class="hero-section page-width"><div class="hero-copy"><span class="kicker"><i data-lucide="sparkles"></i> SMARTER WAY TO TRAVEL</span><h1>Where will you<br><em>go next?</em></h1><p>Find buses, compare routes and book your journey with BusGo.</p><div class="hero-proof"><span class="avatar-stack"><i>R</i><i>M</i><i>S</i></span><span><strong>12k+</strong> happy travelers this month</span></div></div><div class="hero-art"><div class="sun-disc"></div><div class="road-line"></div><div class="hero-bus"><i data-lucide="bus-front"></i></div><div class="floating-note note-one"><i data-lucide="map-pin"></i><span><strong>48</strong> cities connected</span></div><div class="floating-note note-two"><i data-lucide="clock-3"></i><span>Next bus<br><strong>08 min</strong></span></div></div><form class="search-card glass-card" id="search-form"><div class="search-card-head"><div><span class="kicker">PLAN YOUR JOURNEY</span><h2>Find your perfect ride</h2></div><span class="safe-badge"><i data-lucide="shield-check"></i> Safe & reliable</span></div><div class="search-fields"><label class="search-field"><span>From</span><div><i data-lucide="circle-dot"></i><select id="from-city"><option>Colombo</option><option>Kandy</option><option>Galle</option><option>Jaffna</option></select></div></label><button type="button" class="swap-button" id="swap-cities" title="Swap locations" aria-label="Swap locations"><i data-lucide="arrow-left-right"></i></button><label class="search-field"><span>To</span><div><i data-lucide="map-pin"></i><select id="to-city"><option>Kandy</option><option>Colombo</option><option>Ella</option><option>Galle</option></select></div></label><label class="search-field compact"><span>Travel date</span><div><i data-lucide="calendar-days"></i><input id="travel-date" type="date"></div></label><label class="search-field compact"><span>Passengers</span><div><i data-lucide="users"></i><select id="passengers"><option>1 passenger</option><option>2 passengers</option><option>3 passengers</option><option>4 passengers</option></select></div></label><button class="primary-button" type="submit"><span>Search Buses</span><i data-lucide="arrow-up-right"></i></button></div><p class="search-feedback" id="search-feedback"></p></form></section><section class="quick-section page-width"><div class="section-heading"><div><span class="kicker">MAKE IT EASY</span><h2>Everything in one place</h2></div><a href="#routes">View all <i data-lucide="arrow-up-right"></i></a></div><div class="quick-grid"><a class="quick-card glass-card yellow" href="#routes"><span class="quick-icon"><i data-lucide="search"></i></span><strong>Find a Bus</strong><small>Search 120+ daily trips</small><i class="card-arrow" data-lucide="arrow-up-right"></i></a><a class="quick-card glass-card blue" href="#tracking"><span class="quick-icon"><i data-lucide="radio"></i></span><strong>Live Tracking</strong><small>See buses in real time</small><i class="card-arrow" data-lucide="arrow-up-right"></i></a><a class="quick-card glass-card violet" href="#booking"><span class="quick-icon"><i data-lucide="ticket"></i></span><strong>My Tickets</strong><small>Access your bookings</small><i class="card-arrow" data-lucide="arrow-up-right"></i></a><a class="quick-card glass-card green" href="#routes"><span class="quick-icon"><i data-lucide="route"></i></span><strong>Popular Routes</strong><small>Explore top destinations</small><i class="card-arrow" data-lucide="arrow-up-right"></i></a></div></section><section class="routes-section page-width" id="routes"><div class="section-heading"><div><span class="kicker">TRAVEL FURTHER</span><h2>Popular routes</h2></div><div class="route-tabs"><button class="selected">All routes</button><button>Most booked</button></div></div><div class="route-grid" id="route-list"></div></section><section class="tracking-section page-width" id="tracking"><div class="section-heading"><div><span class="kicker">KNOW BEFORE YOU GO</span><h2>Live bus tracking</h2></div><span class="live-pill"><i></i> Updates every few seconds</span></div><div class="tracking-card glass-card"><div class="tracking-info"><span class="kicker">CURRENTLY TRACKING</span><h3>Colombo <i data-lucide="arrow-right"></i> Kandy</h3><p>Route 138 · Central Express</p><div class="tracked-bus"><span class="bus-avatar"><i data-lucide="bus-front"></i></span><div><strong>Bus NB-4521</strong><small>Heading to Kandy · On route</small></div><b>08 min<br><small>to next stop</small></b></div><button class="secondary-button" id="center-map"><i data-lucide="crosshair"></i> Center on route</button></div><div class="dashboard-map"><div id="map"></div><div class="map-glass-tag"><i data-lucide="radio"></i> LIVE DATA</div><div class="map-legend"><span><i class="dot yellow-dot"></i> BusGo bus</span><span><i class="dot blue-dot"></i> Route</span></div></div></div></section><section class="booking-section page-width" id="booking"><div class="ticket-card"><div class="ticket-main"><span class="kicker">UPCOMING JOURNEY</span><div class="ticket-brand"><span class="brand-mark small"><i data-lucide="bus-front"></i></span><strong>BusGo</strong><span class="confirmed"><i data-lucide="check"></i> Confirmed</span></div><div class="ticket-route"><div><small>DEPARTURE</small><strong>Colombo</strong><b>06:30 AM</b></div><div class="ticket-line"><i data-lucide="bus-front"></i><span></span></div><div><small>ARRIVAL</small><strong>Kandy</strong><b>10:45 AM</b></div></div><div class="ticket-details"><span><small>DATE</small><strong>24 Oct 2026</strong></span><span><small>SEAT</small><strong>12A · Window</strong></span><span><small>BOOKING ID</small><strong>BG-82491</strong></span></div></div><div class="ticket-side"><div class="qr-placeholder"><i data-lucide="qr-code"></i></div><button class="ticket-button" id="ticket-button">View Ticket <i data-lucide="arrow-up-right"></i></button></div></div></section><section class="stats-section page-width"><div><strong>120+</strong><span>Available buses</span></div><div><strong>48</strong><span>Cities connected</span></div><div><strong>36</strong><span>Active routes</span></div><div><strong>12k+</strong><span>Happy travelers</span></div></section></main><footer id="footer"><div class="footer-inner"><a class="brand" href="#home"><span class="brand-mark"><i data-lucide="bus-front"></i></span><span>Bus<span>Go</span></span></a><p>Every journey starts with a better way to move.</p><div class="footer-links"><a href="#routes">Explore routes</a><a href="driver.html">Driver portal</a><a href="#footer">Support center</a></div></div><div class="footer-bottom"><span>© 2026 BusGo Technologies</span><span>Made for journeys that matter.</span></div></footer><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="app.js"></script><script>lucide.createIcons();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071B4D">
+  <meta name="description" content="BusGo smart bus booking and live tracking.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="typography.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>BusGo | Travel smarter</title>
+</head>
+<body class="passenger-page">
+
+  <header class="app-nav" style="position: sticky; top: 0; z-index: 1000;">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><i data-lucide="bus-front"></i></span>
+      <span>Bus<span>Go</span></span>
+    </a>
+    <nav>
+      <a class="active" href="#home">Home</a>
+      <a href="#routes">Routes</a>
+      <a href="#tracking">Live Tracking</a>
+      <a href="#booking">My Bookings</a>
+      <a href="#footer">Help</a>
+      <a class="role-link" href="scan.html">Scan QR</a>
+      <a class="role-link driver-link" href="driver.html">Driver Portal</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="circle-button" title="Notifications" aria-label="Notifications">
+        <i data-lucide="bell"></i>
+        <b></b>
+      </button>
+      <button class="profile-button" title="Profile" aria-label="Profile">
+        <span>AK</span>
+      </button>
+      <button class="menu-button" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero-section page-width">
+      <div class="hero-copy">
+        <span class="kicker"><i data-lucide="sparkles"></i> SMARTER WAY TO TRAVEL</span>
+        <h1>Where will you<br><em>go next?</em></h1>
+        <p>Find buses, compare routes and book your journey with BusGo.</p>
+        <div class="hero-proof">
+          <span class="avatar-stack"><i>R</i><i>M</i><i>S</i></span>
+          <span><strong>12k+</strong> happy travelers this month</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="sun-disc"></div>
+        <div class="road-line"></div>
+        <div class="hero-bus"><i data-lucide="bus-front"></i></div>
+        <div class="floating-note note-one">
+          <i data-lucide="map-pin"></i>
+          <span><strong>48</strong> cities connected</span>
+        </div>
+        <div class="floating-note note-two">
+          <i data-lucide="clock-3"></i>
+          <span>Next bus<br><strong>08 min</strong></span>
+        </div>
+      </div>
+      <form class="search-card glass-card" id="search-form">
+        <div class="search-card-head">
+          <div>
+            <span class="kicker">PLAN YOUR JOURNEY</span>
+            <h2>Find your perfect ride</h2>
+          </div>
+          <span class="safe-badge"><i data-lucide="shield-check"></i> Safe & reliable</span>
+        </div>
+        <div class="search-fields">
+          <label class="search-field">
+            <span>From</span>
+            <div>
+              <i data-lucide="circle-dot"></i>
+              <select id="from-city">
+                <option>Colombo</option>
+                <option>Kandy</option>
+                <option>Galle</option>
+                <option>Jaffna</option>
+              </select>
+            </div>
+          </label>
+          <button type="button" class="swap-button" id="swap-cities" title="Swap locations" aria-label="Swap locations">
+            <i data-lucide="arrow-left-right"></i>
+          </button>
+          <label class="search-field">
+            <span>To</span>
+            <div>
+              <i data-lucide="map-pin"></i>
+              <select id="to-city">
+                <option>Kandy</option>
+                <option>Colombo</option>
+                <option>Ella</option>
+                <option>Galle</option>
+              </select>
+            </div>
+          </label>
+          <label class="search-field compact">
+            <span>Travel date</span>
+            <div>
+              <i data-lucide="calendar-days"></i>
+              <input id="travel-date" type="date">
+            </div>
+          </label>
+          <label class="search-field compact">
+            <span>Passengers</span>
+            <div>
+              <i data-lucide="users"></i>
+              <select id="passengers">
+                <option>1 passenger</option>
+                <option>2 passengers</option>
+                <option>3 passengers</option>
+                <option>4 passengers</option>
+              </select>
+            </div>
+          </label>
+          <button class="primary-button" type="submit">
+            <span>Search Buses</span>
+            <i data-lucide="arrow-up-right"></i>
+          </button>
+        </div>
+        <p class="search-feedback" id="search-feedback"></p>
+      </form>
+    </section>
+
+    <section class="quick-section page-width">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">MAKE IT EASY</span>
+          <h2>Everything in one place</h2>
+        </div>
+        <a href="#routes">View all <i data-lucide="arrow-up-right"></i></a>
+      </div>
+      <div class="quick-grid">
+        <a class="quick-card glass-card yellow" href="#routes">
+          <span class="quick-icon"><i data-lucide="search"></i></span>
+          <strong>Find a Bus</strong>
+          <small>Search 120+ daily trips</small>
+          <i class="card-arrow" data-lucide="arrow-up-right"></i>
+        </a>
+        <a class="quick-card glass-card blue" href="#tracking">
+          <span class="quick-icon"><i data-lucide="radio"></i></span>
+          <strong>Live Tracking</strong>
+          <small>See buses in real time</small>
+          <i class="card-arrow" data-lucide="arrow-up-right"></i>
+        </a>
+        <a class="quick-card glass-card violet" href="#booking">
+          <span class="quick-icon"><i data-lucide="ticket"></i></span>
+          <strong>My Tickets</strong>
+          <small>Access your bookings</small>
+          <i class="card-arrow" data-lucide="arrow-up-right"></i>
+        </a>
+        <a class="quick-card glass-card green" href="#routes">
+          <span class="quick-icon"><i data-lucide="route"></i></span>
+          <strong>Popular Routes</strong>
+          <small>Explore top destinations</small>
+          <i class="card-arrow" data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="routes-section page-width" id="routes">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">TRAVEL FURTHER</span>
+          <h2>Popular routes</h2>
+        </div>
+        <div class="route-tabs">
+          <button class="selected">All routes</button>
+          <button>Most booked</button>
+        </div>
+      </div>
+      <div class="route-grid" id="route-list"></div>
+    </section>
+
+    <section class="tracking-section page-width" id="tracking">
+      <div class="section-heading">
+        <div>
+          <span class="kicker">KNOW BEFORE YOU GO</span>
+          <h2>Live bus tracking</h2>
+        </div>
+        <span class="live-pill"><i></i> Updates every few seconds</span>
+      </div>
+      <div class="tracking-card glass-card">
+        <div class="tracking-info">
+          <span class="kicker">CURRENTLY TRACKING</span>
+          <h3>Colombo <i data-lucide="arrow-right"></i> Kandy</h3>
+          <p>Route 138 · Central Express</p>
+          <div class="tracked-bus">
+            <span class="bus-avatar"><i data-lucide="bus-front"></i></span>
+            <div>
+              <strong>Bus NB-4521</strong>
+              <small>Heading to Kandy · On route</small>
+            </div>
+            <b>08 min<br><small>to next stop</small></b>
+          </div>
+          <button class="secondary-button" id="center-map">
+            <i data-lucide="crosshair"></i> Center on route
+          </button>
+        </div>
+        <div class="dashboard-map">
+          <div id="map"></div>
+          <div class="map-glass-tag"><i data-lucide="radio"></i> LIVE DATA</div>
+          <div class="map-legend">
+            <span><i class="dot yellow-dot"></i> BusGo bus</span>
+            <span><i class="dot blue-dot"></i> Route</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section page-width" id="booking">
+      <div class="ticket-card">
+        <div class="ticket-main">
+          <span class="kicker">UPCOMING JOURNEY</span>
+          <div class="ticket-brand">
+            <span class="brand-mark small"><i data-lucide="bus-front"></i></span>
+            <strong>BusGo</strong>
+            <span class="confirmed"><i data-lucide="check"></i> Confirmed</span>
+          </div>
+          <div class="ticket-route">
+            <div>
+              <small>DEPARTURE</small>
+              <strong>Colombo</strong>
+              <b>06:30 AM</b>
+            </div>
+            <div class="ticket-line">
+              <i data-lucide="bus-front"></i>
+              <span></span>
+            </div>
+            <div>
+              <small>ARRIVAL</small>
+              <strong>Kandy</strong>
+              <b>10:45 AM</b>
+            </div>
+          </div>
+          <div class="ticket-details">
+            <span><small>DATE</small><strong>24 Oct 2026</strong></span>
+            <span><small>SEAT</small><strong>12A · Window</strong></span>
+            <span><small>BOOKING ID</small><strong>BG-82491</strong></span>
+          </div>
+        </div>
+        <div class="ticket-side">
+          <div class="qr-placeholder">
+            <i data-lucide="qr-code"></i>
+          </div>
+          <button class="ticket-button" id="ticket-button">View Ticket <i data-lucide="arrow-up-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section page-width">
+      <div><strong>120+</strong><span>Available buses</span></div>
+      <div><strong>48</strong><span>Cities connected</span></div>
+      <div><strong>36</strong><span>Active routes</span></div>
+      <div><strong>12k+</strong><span>Happy travelers</span></div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-inner">
+      <a class="brand" href="#home">
+        <span class="brand-mark"><i data-lucide="bus-front"></i></span>
+        <span>Bus<span>Go</span></span>
+      </a>
+      <p>Every journey starts with a better way to move.</p>
+      <div class="footer-links">
+        <a href="#routes">Explore routes</a>
+        <a href="driver.html">Driver portal</a>
+        <a href="#footer">Support center</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BusGo Technologies</span>
+      <span>Made for journeys that matter.</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
