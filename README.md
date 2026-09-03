@@ -6,9 +6,9 @@ BusGo is a premium, mobile-first transportation platform for route discovery, li
 
 ## Live Demo
 
-- **Passenger app:** `https://YOUR-VERCEL-DOMAIN.vercel.app/`
-- **Driver portal:** `https://YOUR-VERCEL-DOMAIN.vercel.app/driver.html`
-- **Conductor ticket verifier:** `https://YOUR-VERCEL-DOMAIN.vercel.app/scan.html`
+- **Passenger app:** `https://bus-go-opal.vercel.app/index.html`
+- **Driver portal:** `https://bus-go-opal.vercel.app/driver.html`
+- **Conductor ticket verifier:** `https://bus-go-opal.vercel.app/scan.html`
 
 Replace the placeholder domain after the first Vercel deployment.
 
