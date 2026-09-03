@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#101514">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="typography.css">
+  <link rel="stylesheet" href="driver-polish.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>BusGo | Driver portal</title>
+</head>
+<body class="driver-page">
+  <header class="topbar driver-topbar"><a class="brand" href="index.html"><span class="brand-mark">B</span><span>busgo</span></a><span class="portal-label">DRIVER PORTAL</span><a class="icon-button" href="index.html" title="Passenger view" aria-label="Passenger view"><i data-lucide="map"></i></a></header>
+  <main class="driver-main">
+    <div class="driver-intro"><span class="eyebrow">GPS PUBLISHER / 01</span><h1>Keep your route<br><em>moving.</em></h1><p>Broadcast your live position so passengers can see the next stop in real time.</p></div>
+    <form class="driver-panel" id="driver-form">
+      <div class="auth-block" id="auth-block"><div class="field-group"><label for="driver-email">DRIVER EMAIL</label><input id="driver-email" class="auth-input" type="email" autocomplete="email" placeholder="driver@busgo.lk" required></div><div class="field-group"><label for="driver-password">PASSWORD</label><input id="driver-password" class="auth-input" type="password" autocomplete="current-password" placeholder="Your private password" required></div><button class="secondary-button auth-button" id="sign-in-button" type="button"><i data-lucide="lock-keyhole"></i> Sign in securely</button><p class="auth-message" id="auth-message"></p></div>
+      <div class="field-group"><label>SELECT YOUR VEHICLE</label><div class="vehicle-options"><label class="vehicle-option"><input type="radio" name="bus" value="bus-01" checked><span><b>01</b><small>MATUGAMA</small></span><i>✓</i></label><label class="vehicle-option"><input type="radio" name="bus" value="bus-02"><span><b>02</b><small>ALUTHGAMA</small></span><i>✓</i></label></div></div>
+      <div class="field-group pin-field"><label for="pin">DRIVER PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" required><span class="field-hint">4 digit route PIN</span></div>
+      <button class="journey-button" id="journey-button" type="submit" disabled><span class="button-icon"><i data-lucide="radio"></i></span><span id="journey-label">START JOURNEY</span><small id="journey-subtitle">Sign in to broadcast</small></button><button class="simulate-button" id="simulate-button" type="button"><i data-lucide="play-circle"></i> Simulate route demo</button>
+    </form>
+    <section class="telemetry-panel"><div class="telemetry-header"><span class="eyebrow">TELEMETRY</span><span id="connection-state" class="connection-state">● STANDBY</span></div><div class="telemetry-grid"><div><span>GPS STATUS</span><strong id="gps-status">Not broadcasting</strong></div><div><span>LAST PING</span><strong id="last-ping">—</strong></div><div><span>COORDINATES</span><strong id="coordinates">—</strong></div><div><span>VELOCITY</span><strong id="velocity">—</strong></div></div></section>
+    <p class="driver-note">Your browser needs location permission. Keep this tab open while the journey is active.</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script><script src="driver.js"></script><script>lucide.createIcons();</script>
+</body>
+</html>
