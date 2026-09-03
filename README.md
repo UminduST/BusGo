@@ -4,11 +4,11 @@ BusGo is a premium, mobile-first transportation platform for route discovery, li
 
 > **Demo status:** This is a presentation-ready static demo. It works without a production database using sample routes and local demo interactions. Supabase Realtime and Auth are supported when configured.
 
-## Live Demo
+## 🔗 Live Demo
 
-- **Passenger app:** `[Open Live App](https://bus-go-opal.vercel.app/index.html)`
-- **Driver portal:** `[Open Driver Portal](https://bus-go-opal.vercel.app/driver.html)`
-- **Conductor ticket verifier:** `[Open Scanner](https://bus-go-opal.vercel.app/scan.html)`
+- **Passenger app:** [Open Live App](https://bus-go-opal.vercel.app/index.html)
+- **Driver portal:** [Open Driver Portal](https://bus-go-opal.vercel.app/driver.html)
+- **Conductor ticket verifier:** [Open Scanner](https://bus-go-opal.vercel.app/scan.html)
 
 Replace the placeholder domain after the first Vercel deployment.
 
